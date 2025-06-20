@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+.venv/
+
+# Env and logs
+.env
+*.log
+*.db
+*.sqlite3
+
+# Model / dataset besar (jika tidak dipakai langsung)
+*.csv
+*.pth
+*.xml
+*.tbl
+*.rar
+
+

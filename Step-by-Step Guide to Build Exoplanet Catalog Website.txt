@@ -1,0 +1,39 @@
+
+# Step-by-Step Guide: Exoplanet Catalog Website
+
+## 1. Backend Refactor
+- [ ] Refactor endpoints for pagination, filtering, and generalization.
+- [ ] Add caching for frequent queries.
+- [ ] Implement input validation and rate limiting.
+- [ ] Add user authentication endpoints.
+- [ ] Add admin endpoints for data management.
+- [ ] Standardize error responses.
+- [ ] Add API documentation (Swagger/OpenAPI).
+- [ ] Write tests for all endpoints.
+
+## 2. Data Model & Sync
+- [ ] Design MongoDB schema for exoplanets, users, and favorites.
+- [ ] Implement periodic sync from NASA Exoplanet Archive.
+
+## 3. Frontend Development
+- [ ] Scaffold React app with routing.
+- [ ] Build catalog page with table/grid, filters, and search.
+- [ ] Build exoplanet detail page with visualizations.
+- [ ] Implement user login/register and favorites.
+- [ ] Build admin dashboard.
+- [ ] Ensure responsive design.
+
+## 4. Integration & Testing
+- [ ] Connect frontend to backend API.
+- [ ] Test all features and fix bugs.
+
+## 5. Deployment
+- [ ] Dockerize backend and frontend.
+- [ ] Deploy to cloud (Heroku, AWS, GCP, etc.).
+- [ ] Set up CI/CD.
+
+## 6. Polish & Launch
+- [ ] Polish UI/UX.
+- [ ] Write documentation.
+- [ ] Launch and monitor.
+
