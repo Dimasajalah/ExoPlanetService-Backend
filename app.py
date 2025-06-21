@@ -30,7 +30,10 @@ app.config.from_object(Config)
 app.config["MONGO_URI"] = os.environ.get("MONGO", "mongodb://localhost:27017/mydb")
 
 # Allow requests from the frontend development server
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": [
+    "http://localhost:3000",
+    "https://exo-planet-service-frontend-n5ig.vercel.app"
+]}}, supports_credentials=True)
 
 # Initialize extensions
 cors.init_app(app)
