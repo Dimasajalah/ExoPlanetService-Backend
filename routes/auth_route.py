@@ -24,7 +24,14 @@ def google_login():
     user = find_user_by_email(mongo, email)
 
     if not user:
-        create_user(mongo, username=name, email=email, password="", avatar=avatar, role='user')
+        create_user(
+            mongo,
+            username=name,
+            email=email,
+            password="",
+            avatar=avatar,
+            role='user'
+        )
         user = find_user_by_email(mongo, email)
 
     token = jwt.encode(
@@ -42,7 +49,13 @@ def google_login():
     }
 
     resp = make_response(jsonify(user_response))
-    resp.set_cookie('access_token', token, httponly=True, secure=False, samesite='Lax')
+    resp.set_cookie(
+        'access_token',
+        token,
+        httponly=True,
+        secure=True,           # ✅ Wajib true saat pakai HTTPS (Vercel)
+        samesite='None'        # ✅ Agar bisa dipakai cross-origin
+    )
     return resp, 200
 
 
@@ -53,7 +66,7 @@ def signup():
     email = data.get('email')
     username = data.get('username')
     password = data.get('password')
-    role = data.get('role', 'user')  # Ambil role dari frontend (default user)
+    role = data.get('role', 'user')  # default user
 
     if not all([email, username, password]):
         return error_handler(400, "Email, username, dan password wajib diisi")
@@ -62,8 +75,6 @@ def signup():
         return error_handler(400, "User already exists")
 
     create_user(mongo, username=username, email=email, password=password, role=role)
-
-    # Ambil data user untuk auto-login setelah signup
     user = find_user_by_email(mongo, email)
 
     token = jwt.encode(
@@ -81,9 +92,14 @@ def signup():
     }
 
     resp = make_response(jsonify(user_response))
-    resp.set_cookie('access_token', token, httponly=True, secure=False, samesite='Lax')
+    resp.set_cookie(
+        'access_token',
+        token,
+        httponly=True,
+        secure=True,
+        samesite='None'
+    )
     return resp, 201
-
 
 
 # 🔹 EMAIL/PASSWORD SIGNIN
@@ -118,7 +134,13 @@ def signin():
     }
 
     resp = make_response(jsonify(user_response))
-    resp.set_cookie('access_token', token, httponly=True, secure=False, samesite='Lax')
+    resp.set_cookie(
+        'access_token',
+        token,
+        httponly=True,
+        secure=True,
+        samesite='None'
+    )
     return resp, 200
 
 
