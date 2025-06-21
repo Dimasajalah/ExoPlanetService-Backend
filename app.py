@@ -13,7 +13,7 @@ from config import Config
 from extensions import mongo, jwt, cors, admin
 from admin import init_admin
 from urllib.parse import quote
-from routes.ml_analyzer import ml_analyzer_bp
+# from routes.ml_analyzer import ml_analyzer_bp
 from flask_pymongo import PyMongo
 from routes.user_route import user_bp
 from routes.auth_route import auth_bp
@@ -39,7 +39,7 @@ mongo.init_app(app)
 
 app.register_blueprint(user_bp)
 app.register_blueprint(auth_bp)
-app.register_blueprint(ml_analyzer_bp)
+# app.register_blueprint(ml_analyzer_bp)
 app.register_blueprint(contact_bp)
 app.register_blueprint(admin_bp)  # ✅ pastikan ini ADA
 
