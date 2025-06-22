@@ -40,6 +40,14 @@ CORS(app,
 cors.init_app(app)
 jwt.init_app(app)
 mongo.init_app(app)
+try:
+    print("✅ mongo.db initialized:", mongo.db)
+    print("✅ users collection object:", mongo.db.users)
+    test_user_count = mongo.db.users.count_documents({})
+    print(f"✅ users collection connected successfully. Found {test_user_count} users.")
+except Exception as e:
+    print("❌ MongoDB connection test failed:", str(e))
+
 
 app.register_blueprint(user_bp)
 app.register_blueprint(auth_bp)
