@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, make_response
+from flask_cors import cross_origin
 from models.user_model import create_user, find_user_by_email
 from utils.error import error_handler
 from werkzeug.security import check_password_hash
@@ -12,6 +13,10 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 # 🔹 GOOGLE LOGIN
 @auth_bp.route('/google', methods=['POST'])
+@cross_origin(
+    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
+    supports_credentials=True
+)
 def google_login():
     data = request.get_json()
     email = data.get('email')
@@ -61,6 +66,10 @@ def google_login():
 
 # 🔹 EMAIL/PASSWORD SIGNUP
 @auth_bp.route('/signup', methods=['POST'])
+@cross_origin(
+    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
+    supports_credentials=True
+)
 def signup():
     data = request.json
     email = data.get('email')
@@ -104,6 +113,10 @@ def signup():
 
 # 🔹 EMAIL/PASSWORD SIGNIN
 @auth_bp.route('/signin', methods=['POST'])
+@cross_origin(
+    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
+    supports_credentials=True
+)
 def signin():
     data = request.json
     email = data.get('email')
@@ -146,6 +159,10 @@ def signin():
 
 # 🔹 SIGNOUT
 @auth_bp.route('/signout', methods=['GET'])
+@cross_origin(
+    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
+    supports_credentials=True
+)
 def signout():
     resp = jsonify({"message": "User has been logged out!"})
     resp.delete_cookie('access_token')
