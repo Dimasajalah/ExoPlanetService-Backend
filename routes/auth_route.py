@@ -10,12 +10,16 @@ import datetime
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
+# Frontend origin yang diizinkan
+FRONTEND_URL = "https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app"
 
 # 🔹 GOOGLE LOGIN
 @auth_bp.route('/google', methods=['POST'])
 @cross_origin(
-    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
-    supports_credentials=True
+    origins=FRONTEND_URL,
+    supports_credentials=True,
+    methods=["POST"],
+    allow_headers=["Content-Type"]
 )
 def google_login():
     data = request.get_json()
@@ -58,24 +62,26 @@ def google_login():
         'access_token',
         token,
         httponly=True,
-        secure=True,           # ✅ Wajib true saat pakai HTTPS (Vercel)
-        samesite='None'        # ✅ Agar bisa dipakai cross-origin
+        secure=True,
+        samesite='None'
     )
     return resp, 200
 
 
-# 🔹 EMAIL/PASSWORD SIGNUP
+# 🔹 SIGN UP
 @auth_bp.route('/signup', methods=['POST'])
 @cross_origin(
-    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
-    supports_credentials=True
+    origins=FRONTEND_URL,
+    supports_credentials=True,
+    methods=["POST"],
+    allow_headers=["Content-Type"]
 )
 def signup():
     data = request.json
     email = data.get('email')
     username = data.get('username')
     password = data.get('password')
-    role = data.get('role', 'user')  # default user
+    role = data.get('role', 'user')
 
     if not all([email, username, password]):
         return error_handler(400, "Email, username, dan password wajib diisi")
@@ -111,11 +117,13 @@ def signup():
     return resp, 201
 
 
-# 🔹 EMAIL/PASSWORD SIGNIN
+# 🔹 SIGN IN
 @auth_bp.route('/signin', methods=['POST'])
 @cross_origin(
-    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
-    supports_credentials=True
+    origins=FRONTEND_URL,
+    supports_credentials=True,
+    methods=["POST"],
+    allow_headers=["Content-Type"]
 )
 def signin():
     data = request.json
@@ -157,11 +165,12 @@ def signin():
     return resp, 200
 
 
-# 🔹 SIGNOUT
+# 🔹 SIGN OUT
 @auth_bp.route('/signout', methods=['GET'])
 @cross_origin(
-    origins="https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app",
-    supports_credentials=True
+    origins=FRONTEND_URL,
+    supports_credentials=True,
+    methods=["GET"]
 )
 def signout():
     resp = jsonify({"message": "User has been logged out!"})
