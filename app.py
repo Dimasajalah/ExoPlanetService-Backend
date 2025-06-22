@@ -31,11 +31,6 @@ print("✅ Loaded MONGO_URI:", app.config["MONGO_URI"])
 
 # app.config["MONGO_URI"] = os.environ.get("MONGO", "mongodb://localhost:27017/mydb")
 
-# Allow requests from the frontend development server
-CORS(app,
-     supports_credentials=True,
-     origins=["https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app"])
-
 # Initialize extensions
 cors.init_app(app)
 jwt.init_app(app)
