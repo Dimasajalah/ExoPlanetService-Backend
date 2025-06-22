@@ -5,5 +5,8 @@ from flask_admin import Admin
 
 mongo = PyMongo()
 jwt = JWTManager()
-cors = CORS()
+cors = CORS(
+    resources={r"/*": {"origins": "https://exo-planet-service-frontend-n5ig-5cmpfimi1.vercel.app"}},
+    supports_credentials=True
+)
 admin = Admin(name='ExoPlanet Admin', template_mode='bootstrap3')
