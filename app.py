@@ -27,7 +27,9 @@ frontend_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../fr
 
 app = Flask(__name__, static_folder=frontend_folder, static_url_path="/")
 app.config.from_object(Config)
-app.config["MONGO_URI"] = os.environ.get("MONGO", "mongodb://localhost:27017/mydb")
+print("✅ Loaded MONGO_URI:", app.config["MONGO_URI"])
+
+# app.config["MONGO_URI"] = os.environ.get("MONGO", "mongodb://localhost:27017/mydb")
 
 # Allow requests from the frontend development server
 CORS(app,
